@@ -7,22 +7,13 @@ export default {
 		const title = params.get('title') || 'Missing title';
 		const description = params.get('description') || 'Missing description';
 
-		const html = `
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background: #160f29; border: 8px solid white">
-				<div style="display: flex; flex-direction:column ;width: 100vw; padding: 40px; color: white;">
-						<h1 style="font-size: 60px; font-weight: 600; margin: 0; font-weight: 500">${title}</h1>
-						<p>${description}</p>
-				</div>
-    </div>
-   `;
-
 		return new ImageResponse(<OgBlog title={title} description={description} />, {
 			width: 1200,
 			height: 630,
 			fonts: [
 				{
 					name: 'Roboto',
-					data: await fetchFont('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/fonts/roboto/Roboto-Regular.ttf', ctx),
+					data: await fetchFont('https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-mono@latest/latin-400-normal.ttf', ctx),
 					weight: 400,
 					style: 'normal',
 				},
@@ -41,12 +32,24 @@ function OgBlog(props: { title: string; description?: string }) {
 				fontFamily: 'Roboto',
 				background: '#160f29',
 				padding: 10,
+				position: 'relative',
 			}}
 		>
 			<div
 				style={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					filter: 'url(#grainy)',
+					opacity: 0.1, // Adjust opacity of the grain
+					pointerEvents: 'none', // Make sure it doesn't interfere with content
+				}}
+			/>
+			<div
+				style={{
 					color: 'white',
-
 					borderRadius: 10,
 					display: 'flex',
 					flexDirection: 'column',
@@ -54,6 +57,7 @@ function OgBlog(props: { title: string; description?: string }) {
 					flexGrow: 1,
 					width: '100%',
 					padding: 40,
+					zIndex: 1, // Ensure content is above the grain
 				}}
 			>
 				<h1
@@ -65,6 +69,19 @@ function OgBlog(props: { title: string; description?: string }) {
 					{props.title}
 				</h1>
 				{props.description && <p style={{ fontSize: 60, maxWidth: '100vw', opacity: 0.6 }}>{props.description}</p>}
+			</div>
+			<div
+				style={{
+					position: 'absolute',
+					bottom: 40,
+					right: 40,
+					fontSize: 30,
+					color: 'white',
+					opacity: 0.8,
+					zIndex: 1,
+				}}
+			>
+				chiubaca.com
 			</div>
 		</div>
 	);

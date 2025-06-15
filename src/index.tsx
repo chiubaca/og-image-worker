@@ -62,13 +62,31 @@ function OgBlog(props: { title: string; description?: string }) {
 			>
 				<h1
 					style={{
-						fontSize: 100,
+						fontSize: 70,
 						fontWeight: '600',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+						maxWidth: '100%',
 					}}
 				>
 					{props.title}
 				</h1>
-				{props.description && <p style={{ fontSize: 60, maxWidth: '100vw', opacity: 0.6 }}>{props.description}</p>}
+				{props.description && (
+					<p
+						style={{
+							fontSize: 40,
+							maxWidth: '100%',
+							opacity: 0.6,
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							display: '-webkit-box',
+							WebkitLineClamp: 3, // Limit to 3 lines
+							WebkitBoxOrient: 'vertical',
+						}}
+					>
+						{props.description}
+					</p>
+				)}
 			</div>
 			<div
 				style={{

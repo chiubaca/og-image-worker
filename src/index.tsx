@@ -28,36 +28,20 @@ function OgBlog(props: { title: string; description?: string }) {
 			style={{
 				display: 'flex',
 				height: '100vh',
-				border: '5px solid white',
 				fontFamily: 'Roboto',
 				background: '#160f29',
-				padding: 10,
 				position: 'relative',
 			}}
 		>
 			<div
 				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-					filter: 'url(#grainy)',
-					opacity: 0.1, // Adjust opacity of the grain
-					pointerEvents: 'none', // Make sure it doesn't interfere with content
-				}}
-			/>
-			<div
-				style={{
 					color: 'white',
-					borderRadius: 10,
 					display: 'flex',
 					flexDirection: 'column',
 					height: '100%',
 					flexGrow: 1,
 					width: '100%',
 					padding: 40,
-					zIndex: 1, // Ensure content is above the grain
 				}}
 			>
 				<h1

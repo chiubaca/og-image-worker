@@ -9,7 +9,14 @@
 	"compatibility_date": "2025-06-14",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"workers_dev": false,
+	"routes": [
+		{
+			"pattern": "og.chiubaca.com",
+			"custom_domain": true
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

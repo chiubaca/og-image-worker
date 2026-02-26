@@ -15,8 +15,8 @@ export default {
 				height: 630,
 				fonts: [
 					{
-						name: 'Roboto',
-						data: await fetchFont('https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-mono@latest/latin-400-normal.ttf', ctx),
+						name: 'JetBrains Mono',
+						data: await fetchFont('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.ttf', ctx),
 						weight: 400,
 						style: 'normal',
 					},
@@ -112,9 +112,10 @@ function OgNewsletter(props: { issue: string }) {
 			style={{
 				display: 'flex',
 				height: '100vh',
-				fontFamily: 'Roboto',
+				fontFamily: '"JetBrains Mono", "Fira Code", "SF Mono", "Consolas", monospace',
 				background: '#1a1a2e',
 				position: 'relative',
+				border: '20px solid #FF4C4C',
 			}}
 		>
 			<div
@@ -134,6 +135,7 @@ function OgNewsletter(props: { issue: string }) {
 						opacity: 0.6,
 						textTransform: 'uppercase',
 						letterSpacing: 4,
+						color: '#FF7070',
 					}}
 				>
 					Newsletter
@@ -143,9 +145,10 @@ function OgNewsletter(props: { issue: string }) {
 						fontSize: 80,
 						fontWeight: '700',
 						marginTop: 10,
+						color: '#FF4C4C',
 					}}
 				>
-					The Weekly Claw
+					The Weekly Claws
 				</h1>
 				<p
 					style={{
@@ -163,7 +166,7 @@ function OgNewsletter(props: { issue: string }) {
 					bottom: 40,
 					right: 40,
 					fontSize: 30,
-					color: 'white',
+					color: '#FF7070',
 					opacity: 0.8,
 					zIndex: 1,
 				}}

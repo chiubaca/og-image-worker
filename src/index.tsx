@@ -3,9 +3,26 @@ import { ImageResponse } from 'workers-og';
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		const params = new URLSearchParams(new URL(request.url).search);
+		const url = new URL(request.url);
+		const params = url.searchParams;
 		const title = params.get('title') || 'Missing title';
 		const description = params.get('description') || 'Missing description';
+
+		if (url.pathname.startsWith('/newsletter/clawed-club')) {
+			const issue = params.get('issue') || '1';
+			return new ImageResponse(<OgNewsletter issue={issue} />, {
+				width: 1200,
+				height: 630,
+				fonts: [
+					{
+						name: 'Roboto',
+						data: await fetchFont('https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-mono@latest/latin-400-normal.ttf', ctx),
+						weight: 400,
+						style: 'normal',
+					},
+				],
+			});
+		}
 
 		return new ImageResponse(<OgBlog title={title} description={description} />, {
 			width: 1200,
@@ -64,7 +81,7 @@ function OgBlog(props: { title: string; description?: string }) {
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
 							display: '-webkit-box',
-							WebkitLineClamp: 3, // Limit to 3 lines
+							WebkitLineClamp: 3,
 							WebkitBoxOrient: 'vertical',
 						}}
 					>
@@ -84,6 +101,74 @@ function OgBlog(props: { title: string; description?: string }) {
 				}}
 			>
 				chiubaca.com
+			</div>
+		</div>
+	);
+}
+
+function OgNewsletter(props: { issue: string }) {
+	return (
+		<div
+			style={{
+				display: 'flex',
+				height: '100vh',
+				fontFamily: 'Roboto',
+				background: '#1a1a2e',
+				position: 'relative',
+			}}
+		>
+			<div
+				style={{
+					color: 'white',
+					display: 'flex',
+					flexDirection: 'column',
+					height: '100%',
+					flexGrow: 1,
+					width: '100%',
+					padding: 40,
+				}}
+			>
+				<span
+					style={{
+						fontSize: 30,
+						opacity: 0.6,
+						textTransform: 'uppercase',
+						letterSpacing: 4,
+					}}
+				>
+					Newsletter
+				</span>
+				<h1
+					style={{
+						fontSize: 80,
+						fontWeight: '700',
+						marginTop: 10,
+					}}
+				>
+					The Weekly Claw
+				</h1>
+				<p
+					style={{
+						fontSize: 40,
+						opacity: 0.8,
+						marginTop: 20,
+					}}
+				>
+					Issue #{props.issue}
+				</p>
+			</div>
+			<div
+				style={{
+					position: 'absolute',
+					bottom: 40,
+					right: 40,
+					fontSize: 30,
+					color: 'white',
+					opacity: 0.8,
+					zIndex: 1,
+				}}
+			>
+				Clawed Club
 			</div>
 		</div>
 	);

@@ -43,7 +43,7 @@ function OgNewsletter(props: { issue: string }) {
 					width: '100%',
 					height: '100%',
 					objectFit: 'cover',
-					opacity: 0.5,
+					opacity: 0.35,
 				}}
 			/>
 			<div
@@ -51,19 +51,22 @@ function OgNewsletter(props: { issue: string }) {
 					color: 'white',
 					display: 'flex',
 					flexDirection: 'column',
+					alignItems: 'center',
+					justifyContent: 'center',
 					height: '100%',
 					flexGrow: 1,
 					width: '100%',
 					padding: 40,
 					zIndex: 1,
+					textAlign: 'center',
 				}}
 			>
 				<span
 					style={{
 						fontSize: 30,
-						opacity: 0.6,
 						letterSpacing: 4,
-						color: '#FF7070',
+						color: '#FF4C4C',
+						textShadow: '0 0 5px #FF4C4C',
 					}}
 				>
 					{`<newsletter>`}
@@ -74,6 +77,7 @@ function OgNewsletter(props: { issue: string }) {
 						fontWeight: '700',
 						marginTop: 10,
 						color: '#FF4C4C',
+						textShadow: '0 0 5px #FF4C4C',
 					}}
 				>
 					The Weekly Claws
@@ -83,6 +87,7 @@ function OgNewsletter(props: { issue: string }) {
 						fontSize: 40,
 						opacity: 0.8,
 						marginTop: 20,
+						textShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
 					}}
 				>
 					Issue #{props.issue}
@@ -94,9 +99,10 @@ function OgNewsletter(props: { issue: string }) {
 					bottom: 40,
 					right: 40,
 					fontSize: 30,
-					color: '#FF7070',
+					color: '#FF4C4C',
 					opacity: 0.8,
 					zIndex: 1,
+					textShadow: '0 0 5px #FF4C4C',
 				}}
 			>
 				clawed.club

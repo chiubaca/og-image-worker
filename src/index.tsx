@@ -10,7 +10,7 @@ app.get('/clawed-club/newsletter', async (c) => {
 	return handleNewsletter(params, c.executionCtx);
 });
 
-app.get('/clawed-club/website', async (c) => {
+app.get('/clawed-club/og', async (c) => {
 	const params = new URLSearchParams(c.req.query());
 	return handleClawedClubWebsite(params, c.executionCtx);
 });

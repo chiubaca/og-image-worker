@@ -2,10 +2,9 @@ import * as React from 'react';
 import { ImageResponse } from 'workers-og';
 import type { ExecutionContext } from '@cloudflare/workers-types';
 
-export async function handleNewsletter(
-	params: URLSearchParams,
-	ctx: ExecutionContext
-): Promise<Response> {
+const LOBSTER_IMAGE_URL = 'https://drive.usercontent.google.com/download?id=16h8cMmiNK3DVzbPBMmsmC-ne0nF_haH_';
+
+export async function handleNewsletter(params: URLSearchParams, ctx: ExecutionContext): Promise<Response> {
 	const issue = params.get('issue') || '1';
 
 	return new ImageResponse(<OgNewsletter issue={issue} />, {
@@ -14,10 +13,7 @@ export async function handleNewsletter(
 		fonts: [
 			{
 				name: 'JetBrains Mono',
-				data: await fetchFont(
-					'https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.ttf',
-					ctx
-				),
+				data: await fetchFont('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.ttf', ctx),
 				weight: 400,
 				style: 'normal',
 			},
@@ -31,13 +27,25 @@ function OgNewsletter(props: { issue: string }) {
 			style={{
 				display: 'flex',
 				height: '100vh',
-				fontFamily:
-					'"JetBrains Mono", "Fira Code", "SF Mono", "Consolas", monospace',
+				fontFamily: '"JetBrains Mono", "Consolas", monospace',
 				background: '#1a1a2e',
 				position: 'relative',
-				border: '20px solid #FF4C4C',
+				overflow: 'hidden',
 			}}
 		>
+			<img
+				src={LOBSTER_IMAGE_URL}
+				alt="Lobster"
+				style={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					opacity: 0.5,
+				}}
+			/>
 			<div
 				style={{
 					color: 'white',
@@ -47,18 +55,18 @@ function OgNewsletter(props: { issue: string }) {
 					flexGrow: 1,
 					width: '100%',
 					padding: 40,
+					zIndex: 1,
 				}}
 			>
 				<span
 					style={{
 						fontSize: 30,
 						opacity: 0.6,
-						textTransform: 'uppercase',
 						letterSpacing: 4,
 						color: '#FF7070',
 					}}
 				>
-					Newsletter
+					{`<newsletter>`}
 				</span>
 				<h1
 					style={{
@@ -91,7 +99,7 @@ function OgNewsletter(props: { issue: string }) {
 					zIndex: 1,
 				}}
 			>
-				Clawed Club
+				clawed.club
 			</div>
 		</div>
 	);
